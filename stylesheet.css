@@ -1,0 +1,261 @@
+	*{
+		font-family: helvetica;
+		color: #fff;
+	}
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #fff;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #fff;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #fff;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #fff;
+}
+iframe{
+	background-image: none !important;
+}
+	body{
+		padding: 0 0 2em 0;
+		margin: 0;
+	}
+	.index-body{
+		background-image: url("material-pattern-blue.jpg");
+		background-size: 100%;
+	}
+	table{
+		padding: 2em;
+		width: 780px;
+		margin: 1.4em auto;
+	}
+	.title, h2, h3{
+		margin: auto;
+		text-align: center;
+		background-color: #1b9fc6;
+		font-weight: 200;
+	}
+	h2{
+		font-size: 15px;
+		opacity: 0.6;
+	}
+	h3{
+		font-size: 12px;
+		padding: 0.8em;
+	}
+	ul{
+		list-style: none;
+	}
+	.add-subtasks{
+		background-color: #ab0202 !important;
+		width: 100%;
+	}
+	.add-task-btn{
+		background-color: #1b9fc6;
+		border:none;
+		height: 55px;
+		width: 55px;
+		font-size: 25px;
+		text-align: center;
+		border-radius: 100%;
+		margin: .5em auto 0;
+		display: block;
+	}
+	.add-task-container{
+/*		height: 0;
+		padding: 0;*/
+		padding: 1.2em;
+		width: 30%; 
+		margin: 1em auto;
+		border-radius: 3px;
+		background-color: #2e54a5;
+		display: none;
+		text-align: justify;
+	}
+	.add-task-container > .task-details{
+		margin: 2em auto;
+		background-color: #1b9fc6;
+		padding: 1em;
+/*		height: 0;
+		padding: 0;
+		border:none;*/
+	}
+	.create, .add-subtasks{
+		padding: 1em;
+		border:none;
+	}
+	.create{
+		background-color: #13b54a;
+		width: 100%;
+	}
+	.date-select, .priority{
+		background-color: #1b9fc6;
+	}
+	.date-select, .due-date, .task-priority{
+		display: inline-block;
+	}
+	.date-select, .add-task-container > .task-details, .task-description, .task-priority, .due-date{
+		font-size: 12px;
+		height: 1.5em;
+		border:none;
+	}
+	.date-select, .priority{
+		height: 3em;
+		border:none;
+	}
+	.delete{
+		height: 30px;
+		width: 30px;
+		background-color: #fff;
+	}	
+	.delete-btn{
+		border: none;
+		background-color: #929292;
+		height: 4em;
+		width: 4em;
+		border-radius: 100%;
+		box-shadow: 1px 1px 3px #444;
+		float: right;
+	}
+	.due-date, .date-select, .priority, .task-priority{
+		color: #fff;
+	}
+	.due-date, .date-select, .priority, .task-priority{
+		width: 15%;
+		display: inline-block;
+		text-align: center;
+	}
+	.lvl{
+		width: 100%;
+		position: relative;
+		margin-top: 0;
+		padding-top: 0;
+	}
+	.main-1{
+		text-align: center;
+		font-size: 40px;
+		padding: 0.5em;
+		text-transform: uppercase;
+	}
+	.progress-bar, .progress-amount{
+		width: 100%;
+		border-radius: 10px;
+		background-color: rgba(255,255,255,0.2);
+		text-align: center;
+		margin: 0;
+		padding: 0;
+	}
+	.progress-amount{
+		width: 50%;
+		background-color: #050 !important;
+	}
+	.progress-bar{
+		width: 100%;
+		margin: 0 auto 2em auto !important;
+	}
+	.progress-bar > p{
+		position: absolute;
+		z-index: 2;
+		left: 50%;
+		margin: 0;
+		padding: 0;
+	}
+	.sub{
+		width: 80%;
+		display: block;
+		margin: 0.5em 1em;
+		padding: 0.4em;
+		background-color: rgba(255,255,255,0.2);
+	}
+	.subtask-manager{
+		width: 100%;
+		box-shadow: none !important;
+		padding: 0;
+		margin: 0 auto !important;
+		text-align: center !important;
+	}
+	.subtask-manager *{
+		vertical-align: baseline !important;
+	}
+	.subtask-manager td:nth-child(1){
+		
+	}
+	.task-name{
+		width: 94%;
+		text-align: left;
+	}
+	.td-subtask{
+		padding: 1em 0;
+	}
+	.td-task-name{
+		padding: 0.5em 0 2em;
+	}
+	.task-description{/*DESCRIPTION*/
+		font-size: 12px;
+		width: 94%;
+		height: 3em !important;
+	}
+	.task-details:nth-child(2){
+		display: inline-block;
+	}
+	.title{
+		width: 100%;
+		font-size: 32px;
+		box-shadow: 0px 0px 4px #282828;
+		padding: 0.6em 0em 0.2em 0em;
+	}
+	.add-task-container, .add-task-btn, table{
+		box-shadow: 1px 1px 4px #282828;
+	}
+
+
+	.Leisure{
+		background-color: #13b54a;
+	}
+	.High{
+		background-color: #ab0202;
+	}
+	.Medium{
+		background-color: #c1571c;
+	}
+	.Low{
+		background-color: #dac20d;
+	}
+
+/*VERY SMALL SCREENS-MOBILE PHONES*/
+@media only screen 
+and (min-device-width: 320px) 
+and (max-device-width: 480px){
+	.add-task{
+		height: 160px;
+		width: 160px;
+	}
+
+}
+@media only screen
+and (min-device-width: 480px)
+and (max-device-width: 719px){
+
+
+}
+@media only screen
+and (min-device-width: 720px)
+and (max-device-width: 959px){
+	.add-task{
+		height: 80px;
+		width: 80px;
+	}
+
+	
+}
+@media only screen
+and (min-device-width: 960px){
+
+
+
+
+	
+}
