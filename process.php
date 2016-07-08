@@ -16,10 +16,11 @@ session_start();
 class Task
 {
 	
-	public $htmlRender;
+	public $html;
 	public $dueDate;
 	public $priority;
 	public $description;
+	public $subtaskImportance;
 
 	public static $taskCount = 0;
 
@@ -30,10 +31,10 @@ class Task
 		$this->dueDate .= "-" . $_POST['day'];
 		$this->dueDate .= "-" . $_POST['year'];
 		$this->priority = $_POST['priority'];
-		$description = $_POST['task-description'];
-		$this->htmlRender = '
+		$this->description = $_POST['task-description'];
+		$this->html = '
 			<table class="' . $this->priority . '">
-				<tbody  class="lvl">
+				<tbody class="lvl">
 				<tr>
 					<td class="progress-bar"><p>0%</p>
 						<div class="progress-amount" id="progress-amount-' . $this->taskName . '">&nbsp;</div>
@@ -52,31 +53,37 @@ class Task
 	{
 		$subtaskCount = 1;
 		if (!empty($_POST['subtask-' . $subtaskCount])) {
-			$this->htmlRender .= '<tr>	
+			$this->html .= '<tr>	
 								<td class="td-subtask">SUBTASKS:</td>						
 							</tr>';
 		}
 		while (!empty($_POST['subtask-' . $subtaskCount])) {
 			$this->subtask = $_POST['subtask-' . $subtaskCount];
-			$this->htmlRender .= 					
+			$this->subtaskImportance = $_POST['subtask-importance-' . $subtaskCount];
+			$this->html .= 					
 						'<tr>	
-							<td class="sub">'. $_POST['subtask-' . $subtaskCount] . '</td>						
+							<td class="sub">'. $_POST['subtask-' . $subtaskCount] . '</td>					
 							<td>
-								<input type="checkbox" name="checkbox-' . $this->taskName . "-" . $subtaskCount . '" onchange="toggleSubtaskCheck(this, progress-amount-' . $this->taskName . ');">
+								<input type="checkbox" name="checkbox-' . $this->taskName . "-" . $subtaskCount . '" onchange="toggleSubtaskCheck(this, progress-amount-' . $this->taskName . ',' . $this->subtaskImportance . '");">
 							</td>
 						</tr>';
 			$subtaskCount += 1;
 		}
 
-			$this->htmlRender .= 	'</tbody>
+			$this->html .= 	'</tbody>
 								</table>';
 	}
 
 	public function __construct(){
+		
+		Task::$taskCount++;
+
 		for ($i=0; $i < sizeof($_SESSION['all-tasks']); $i++) {
-			if($_POST['task-name'] == $_SESSION['all-tasks'][$i]->taskName){
-				$_POST['task-name'] .= Task::$taskCount;
-			} 
+				for ($x=0; $x < sizeof($_SESSION['all-tasks'][$i]); $x++) {
+					if($_POST['task-name'] == $_SESSION['all-tasks'][$i][$x]->taskName){
+						$_POST['task-name'] .= Task::$taskCount;
+					} 
+				}
 		}
 
 		$this->getTaskInfo();
@@ -102,15 +109,12 @@ class Task
 		//gets arr
 
 
-		$_SESSION['all-renders'] = array($_SESSION['Hi'],$_SESSION['Med'],$_SESSION['Lo'],$_SESSION['Leis']);
+		$_SESSION['all-tasks'] = array($_SESSION['Hi'],$_SESSION['Med'],$_SESSION['Lo'],$_SESSION['Leis']);
 	
-		Task::$taskCount++;
-
 		// $_SESSION['Hi'] = array();
 		// $_SESSION['Med'] = array();
 		// $_SESSION['Lo'] = array();
 		// $_SESSION['Leis'] = array();
-		// $_SESSION['all-renders'] = array();
 		// $_SESSION['all-tasks'] = array();
 
 	}
@@ -139,10 +143,13 @@ if (isset($_POST['create'])) {
 
 }
 
-if (isset($_POST['delete'])) {
-
-
-
+for ($i=0; $i < sizeof($_SESSION['all-tasks']); $i++) {
+	for ($x=0; $x < sizeof($_SESSION['all-tasks'][$i]); $x++) { 
+		if (!empty($_POST[$_SESSION['all-tasks'][$i][$x]->taskName])) {
+			// array_splice($_SESSION['all-tasks'][$i], $x, 1);
+			echo $_SESSION['all-tasks'][$i][$x]->taskName;
+		}
+	} 
 }
 
 

@@ -23,6 +23,9 @@ iframe{
 		padding: 0 0 2em 0;
 		margin: 0;
 	}
+	button:focus {
+		outline:0;
+	}
 	.index-body{
 		background-image: url("material-pattern-blue.jpg");
 		background-size: 100%;
@@ -50,7 +53,7 @@ iframe{
 		list-style: none;
 	}
 	.add-subtasks{
-		background-color: #ab0202 !important;
+		/*background-color: #ab0202 !important;*/
 		width: 100%;
 	}
 	.add-task-btn{
@@ -76,7 +79,7 @@ iframe{
 		text-align: justify;
 	}
 	.add-task-container > .task-details{
-		margin: 2em auto;
+		margin: 1.2em auto;
 		background-color: #1b9fc6;
 		padding: 1em;
 /*		height: 0;
@@ -99,11 +102,10 @@ iframe{
 	}
 	.date-select, .add-task-container > .task-details, .task-description, .task-priority, .due-date{
 		font-size: 12px;
-		height: 1.5em;
 		border:none;
 	}
-	.date-select, .priority{
-		height: 3em;
+	.date-select, .priority, .subtask-importance{
+		height: 3.1em;
 		border:none;
 	}
 	.delete{
@@ -163,12 +165,22 @@ iframe{
 		margin: 0;
 		padding: 0;
 	}
+	.show-more{
+		display: none;
+	}
+	#show-more-btn, .add-subtasks{
+		background-color: #416eb5;
+		/*border: 2px solid #3c71d0;*/
+	}
 	.sub{
 		width: 80%;
 		display: block;
 		margin: 0.5em 1em;
 		padding: 0.4em;
 		background-color: rgba(255,255,255,0.2);
+	}
+	.subtask-container{
+		text-align: justify;
 	}
 	.subtask-manager{
 		width: 100%;
@@ -184,8 +196,9 @@ iframe{
 		
 	}
 	.task-name{
-		width: 94%;
+		width: 60%;
 		text-align: left;
+		display: inline-block;
 	}
 	.td-subtask{
 		padding: 1em 0;
