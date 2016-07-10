@@ -1,8 +1,4 @@
 <?php
-//start session, load task array
-//every created session pushes the array
-//create task object
-
 
 $_SESSION['Hi'] = array();
 $_SESSION['Med'] = array();
@@ -12,7 +8,7 @@ $_SESSION['all-tasks'] = array();
 
 session_id("ADMIN");
 session_start();
-
+// checkbox
 class Task
 {
 	
@@ -54,7 +50,7 @@ class Task
 		$subtaskCount = 1;
 		if (!empty($_POST['subtask-' . $subtaskCount])) {
 			$this->html .= '<tr>	
-								<td class="td-subtask">SUBTASKS:</td>						
+								<td class="td-subtask">Subtasks:</td>						
 							</tr>';
 		}
 		while (!empty($_POST['subtask-' . $subtaskCount])) {
@@ -64,7 +60,7 @@ class Task
 						'<tr>	
 							<td class="sub">'. $_POST['subtask-' . $subtaskCount] . '</td>					
 							<td>
-								<input type="checkbox" name="checkbox-' . $this->taskName . "-" . $subtaskCount . '" onchange="toggleSubtaskCheck(this, progress-amount-' . $this->taskName . ',' . $this->subtaskImportance . '");">
+								<input class="progress-checkbox" type="checkbox" name="checkbox-' . $this->taskName . "-" . $subtaskCount . '" onchange="toggleSubtaskCheck(this, progress-amount-' . $this->taskName . ',' . $this->subtaskImportance . '");">
 							</td>
 						</tr>';
 			$subtaskCount += 1;
@@ -89,8 +85,6 @@ class Task
 		$this->getTaskInfo();
 		$this->getSubTasks();
 
-		// array_push($_SESSION['all-tasks'], $this);
-
 		if ($this->priority == "High") 
 			array_push($_SESSION['Hi'], $this);
 
@@ -103,54 +97,28 @@ class Task
 		else if ($this->priority == "Leisure") 
 			array_push($_SESSION['Leis'], $this);
 
-		
-		// array_splice($_SESSION['Hi'], 0, 1);
-		//needs index from array
-		//gets arr
-
 
 		$_SESSION['all-tasks'] = array($_SESSION['Hi'],$_SESSION['Med'],$_SESSION['Lo'],$_SESSION['Leis']);
 	
-		// $_SESSION['Hi'] = array();
-		// $_SESSION['Med'] = array();
-		// $_SESSION['Lo'] = array();
-		// $_SESSION['Leis'] = array();
-		// $_SESSION['all-tasks'] = array();
-
 	}
 
 }
 
-class TaskManager
-{
-	function __construct(){
-	}
-	
-};
-
-// TaskManger::__construct(){
-	// $_SESSION['allTasks'] = this->$allTasks;
-// }
 
 if (isset($_POST['create'])) {
 
 	$newTask = new Task();
 
-	// $contents_to_write = '';
-	// $contents_to_write = getTaskInfo($contents_to_write);
-	// $contents_to_write = getSubTasks($contents_to_write);
-	// file_put_contents("contents.txt", $contents_to_write);//contents.txt will be $task.Name . ".txt"
-
 }
 
-for ($i=0; $i < sizeof($_SESSION['all-tasks']); $i++) {
-	for ($x=0; $x < sizeof($_SESSION['all-tasks'][$i]); $x++) { 
-		if (!empty($_POST[$_SESSION['all-tasks'][$i][$x]->taskName])) {
-			// array_splice($_SESSION['all-tasks'][$i], $x, 1);
-			echo $_SESSION['all-tasks'][$i][$x]->taskName;
-		}
-	} 
-}
+// for ($i=0; $i < sizeof($_SESSION['all-tasks']); $i++) {
+// 	for ($x=0; $x < sizeof($_SESSION['all-tasks'][$i]); $x++) { 
+// 		if (!empty($_POST[$_SESSION['all-tasks'][$i][$x]->taskName])) {
+// 			// array_splice($_SESSION['all-tasks'][$i], $x, 1);
+// 			echo $_SESSION['all-tasks'][$i][$x]->taskName;
+// 		}
+// 	} 
+// }
 
 
 //<?php if (!empty($_POST['checkbox'])) echo 'checked="checked"';?> 
