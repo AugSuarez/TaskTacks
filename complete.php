@@ -8,15 +8,15 @@
 
 		$response = mysqli_query($con, "UPDATE tasks SET is_completed = 1 WHERE task_id = '$myId' ");//$result para buenos habitos!! si $result == 1 fue exitosa. 0 -> no 
 
-		// if ($response) {
-		// 	$removeFromDB = mysqli_query($con, "DELETE FROM tasks WHERE is_completed = 1");
+		if ($response) {
+			$removeFromDB = mysqli_query($con, "DELETE FROM tasks WHERE is_completed = 1");
 
-		// 	if ($removeFromDB) {
+			if ($removeFromDB) {
 				echo "ok";
-			// }
-		// 	else {
-		// 		echo "task completed, not deleted";
-		// 	}
-		// }
+			}
+			else {
+				echo "task completed, not deleted";
+			}
+		}
 
 	}

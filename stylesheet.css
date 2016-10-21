@@ -213,6 +213,13 @@ iframe{
 		padding: 0.4em;
 		background-color: rgba(255,255,255,0.2);
 	}
+	.subtask{
+		display: inline-block;
+		background-color: #1b9fc6;
+		margin: 1.2em auto;
+		border:none;
+		padding: 1em;
+	}
 	.subtask-container{
 		text-align: justify;
 	}

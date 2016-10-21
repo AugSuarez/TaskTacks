@@ -2,10 +2,13 @@
 <!-- leave just Name priority and subtasks, and add a more button, which shows due date, other description -->
 <head>
 <?php
-	// include 'process.php';
+	include 'process.php';
 	include 'echotask.php';
 	// include 'newtask.php';
 ?>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="stylesheet.css">
 <script src="js/jquery.min.js"></script>
 </head>
@@ -174,9 +177,11 @@
 
 			});
 
-			$(".complete-btn").click(function(){//TASK COMPLETED
+			$(".lvl").on('click', '.complete-btn', function(){//TASK COMPLETED
 
 				var myId = $(this).attr("data-id");
+				console.log($(this).attr('class'));
+				console.log(myId);
 
 				$.get("complete.php?task-id=" + myId, function(response){//hace llamado get a pagina
 					console.log(response);
@@ -204,71 +209,130 @@
 				
 				subtask_count++;
 				
-				document.getElementsByClassName('create-li')[0].style.width = "38%";
-				document.getElementById('delete-subtasks').style.display = "table-cell";
+				// document.getElementsByClassName('create-li')[0].style.width = "38%";
+				$('.create-li').css('width', '38%');
 
-				var subtask = document.createElement('input');
-				subtask.className = 'subtask';
-				subtask.id = 'subtask-' + subtask_count;
-				subtask.name = subtask.id;
-				subtask.placeholder = "Subtask Name";
-				subtask.style = myStyle.innerHTML + "width:50%;";
-				document.getElementsByClassName('subtask-container')[0].appendChild(subtask);
+				// document.getElementById('delete-subtasks').style.display = "table-cell";
+				$('#delete-subtasks').css('display', 'table-cell');
+
+				// var subtask = document.createElement('input');
+				// subtask.className = 'subtask';
+				// subtask.id = 'subtask-' + subtask_count;
+				// subtask.name = subtask.id;
+				// subtask.placeholder = "Subtask Name";
+				// subtask.style = myStyle.innerHTML + "width:50%;";
+				// document.getElementsByClassName('subtask-container')[0].appendChild(subtask);
+
+				var subtask = $('<input></input>');
+
+				subtask.addClass('subtask');
+
+				subtask.attr('id', 'subtask-' + subtask_count);
+
+				subtask.attr('name', subtask.attr('id'));
+
+				subtask.attr('placeholder', "Subtask Name");
+
+				subtask.addClass('subtask');
+
+				$('.subtask-container').append(subtask);
+
+
+
+				var subtaskImportance = $('<select></select>');
+
+				subtaskImportance.addClass('subtask');
+
+				subtaskImportance.attr('style', 'float: right');
+
+				subtaskImportance.attr('id', 'subtask-importance-' + subtask_count);
+
+				subtaskImportance.attr('name', subtaskImportance.attr('id'));
+
+				$('.subtask-container').append(subtaskImportance);
 				
-				var subtaskImportance = document.createElement('select');
-				subtaskImportance.className = 'subtask-importance';
-				subtaskImportance.id = 'subtask-importance-' + subtask_count;
-				subtaskImportance.name = subtaskImportance.id;
-				subtaskImportance.style = myStyle.innerHTML + "float:right";
-				document.getElementsByClassName('subtask-container')[0].appendChild(subtaskImportance);
+				// var subtaskImportance = document.createElement('select');
+				// subtaskImportance.className = 'subtask-importance';
+				// subtaskImportance.id = 'subtask-importance-' + subtask_count;
+				// subtaskImportance.name = subtaskImportance.id;
+				// subtaskImportance.style = myStyle.innerHTML + "float:right";
+				// document.getElementsByClassName('subtask-container')[0].appendChild(subtaskImportance);
 
-				var optionNoSelect = document.createElement('option');
-				optionNoSelect.innerHTML = "Subtask %";
-				document.getElementById(subtaskImportance.id).appendChild(optionNoSelect);
+				// var optionNoSelect = document.createElement('option');
+				var optionNoSelect = $('<option></option>');
+
+				// optionNoSelect.innerHTML = "Subtask %";
+				optionNoSelect.html('Subtask %');
+
+				// document.getElementById(subtaskImportance.id).appendChild(optionNoSelect);
+				$('#subtask-importance-' + subtask_count).append(optionNoSelect);
 
 				for (var i = 10; i<=100; i+=10) {
-					var option = document.createElement('option');
-					option.innerHTML = i +"%";
-					document.getElementById(subtaskImportance.id).appendChild(option);
+
+					var option = $('<option></option>');
+
+					option.html(i + '%');
+
+					console.log(optionNoSelect.html());
+
+					$('#subtask-importance-' + subtask_count).append(option);
+
 				}
 
 			}
 
 			function delete_Subtask(){
 				
-				var c = document.getElementsByClassName('subtask-container')[0];
+				// var c = document.getElementsByClassName('subtask-container')[0];
 
-				c.removeChild(document.getElementById('subtask-' + subtask_count));
-				c.removeChild(document.getElementById('subtask-importance-' + subtask_count));
+				// c.removeChild(document.getElementById('subtask-' + subtask_count));
+				// c.removeChild(document.getElementById('subtask-importance-' + subtask_count));
+
+				if (subtask_count > 0) {
+					
+					$('#subtask-' + subtask_count).remove();
+
+					$('#subtask-importance-' + subtask_count).remove();
+
+					console.log(subtask_count);
 				
-				if (subtask_count<2) {
-					document.getElementById('delete-subtasks').style.display = "none";
-					document.getElementsByClassName('create-td')[0].style.width = "50%";
+					subtask_count--;
+
 				}
 
-				subtask_count--;
+
+				if (subtask_count == 0) {
+
+					$('#delete-subtasks').css('display', 'none');
+					
+					$('.create-td').css('width', "50%");
+
+				}
+
 
 			}
 
 			function toggleCreator(){
 
-				var e = document.getElementsByClassName('add-task-container')[0];
-				
-					if (e.style.display == 'block'){
-						e.style.display = 'none';
-					}
-					else{
-						e.style.display = 'block';
-					}
-				
-				var d = document.getElementsByClassName('add-task-btn')[0];
-				
-					if (d.innerHTML == '-'){
-						d.innerHTML = '+';
-					}
-					else{
-						d.innerHTML = '-';
-					}
+
+				$('.add-task-container').css('display', function(){
+
+					 var display = ($(this).css('display') == 'block') ? 'none' : 'block';
+
+					 return display;
+
+				});
+
+
+				$('.add-task-btn').html(function(){
+
+					var html = ($(this).html() == '-') ? '+' : '-';
+
+					return html;
+
+				});
+
+				console.log("toggleCreator called");
 
 			}
 
@@ -280,22 +344,39 @@
 			}
 
 			function showMore() {
-				for (var i = 0; i < 5; i++) {
 
-					var e = document.getElementsByClassName('show-more')[i];
+				// for (var i = 0; i < 5; i++) {
 
-					if (e.style.display == "inline-block") {
-						e.style.display = "none";
-					}
-					else
-						e.style.display = "inline-block";
-				}
+				// 	var e = document.getElementsByClassName('show-more')[i];
 
-				var e = document.getElementById('show-more-btn');
-				if (e.innerHTML == "Show More Options")
-					e.innerHTML = "Show Fewer Options";
-				else
-					e.innerHTML = "Show More Options";
+				// 	if (e.style.display == "inline-block") {
+				// 		e.style.display = "none";
+				// 	}
+				// 	else
+				// 		e.style.display = "inline-block";
+				// }
+
+				$('.show-more').css('display', function(){
+
+					var display = ($(this).css('display') == 'inline-block') ? 'none' : 'inline-block';
+
+					return display;
+
+				});
+
+				$('#show-more-btn').html(function(){
+
+					var html = ($(this).html() == "Show More Options") ? "Show Fewer Options" : "Show More Options";
+
+					return html;
+
+				});
+
+
+				// if (e.innerHTML == "Show More Options")
+				// 	e.innerHTML = "Show Fewer Options";
+				// else
+				// 	e.innerHTML = "Show More Options";
 			}
 
 
