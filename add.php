@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <head>
-<?php
-include 'process.php';
-?>
 <link rel="stylesheet" href="stylesheet.css">
 <div class="add-task-container">
 	<input class="task-details task-name" name="task-name" type="text" placeholder="Task Name">
