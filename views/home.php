@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="stylesheet.css">
-<script src="js/jquery.min.js"></script>
+<link rel="stylesheet" href="/assets/css/stylesheet.css">
+<script src="/assets/js/jquery.min.js"></script>
 </head>
 <html>
 	<body class="index-body">
