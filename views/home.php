@@ -1,16 +1,11 @@
 <!DOCTYPE html>
 <!-- leave just Name priority and subtasks, and add a more button, which shows due date, other description -->
 <head>
-<?php
-	include 'process.php';
-	include 'echotask.php';
-	// include 'newtask.php';
-?>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="stylesheet.css">
-<script src="js/jquery.min.js"></script>
+<link rel="stylesheet" href="/assets/css/stylesheet.css">
+<script src="/assets/js/jquery.min.js"></script>
 </head>
 <html>
 	<body class="index-body">
@@ -22,14 +17,10 @@
 				</h3>
 				<h2>
 					Updated:
-					<?php 
-						date_default_timezone_set("America/New_York");
-						$date = date('m/d/Y h:i:s a', time());
-						echo $date;
-					?>
+					<?= $date ?>
 				</h2>
 				<h2>
-					<?php echo session_id();?>
+					<?= $sessionId ?>
 				</h2>
 			</div>
 			<form action="newtask.php" method="post">
@@ -98,28 +89,23 @@
 				</div>
 			</form>
 			<div class="task-container">
-				<?php 
-
-						$priority = ["High", "Medium", "Low", "Leisure"];
-
-						while ($data = mysqli_fetch_assoc($tasksResult)):?>
-
-							<table data-id="<?= $data['task_id'] ?>" class="<?= $priority[$data['task_priority']] ?>">
-								<tbody class="lvl">
-									<tr>
-										<td class="progress-bar"><p>0%</p>
-											<div class="progress-amount" id="progress-amount-' <?=  $data['task_name'] ?> '">&nbsp;</div>
-										</td>
-									</tr>
-									<tr>
-										<td class="main-1"> <?= $data['task_name'] ?> </td>
-										<td><a data-id="<?= $data['task_id'] ?>" class="complete-btn" >&#10004;</a></td>
-									</tr>
-								</tbody>
-							</table>
-
-						<?php endwhile;
-				?>
+				<?php
+				foreach ($tasks as $task):
+					?>
+				<table data-id="<?= $task['task_id'] ?>" class="<?= $priority[$task['task_priority']] ?>">
+					<tbody class="lvl">
+						<tr>
+							<td class="progress-bar"><p>0%</p>
+							<div class="progress-amount" id="progress-amount-' <?=  $task['task_name'] ?> '">&nbsp;</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="main-1"> <?= $task['task_name'] ?> </td>
+						<td><a data-id="<?= $task['task_id'] ?>" class="complete-btn" >&#10004;</a></td>
+					</tr>
+				</tbody>
+				</table>
+				<?php endforeach; ?>
 			</div>
 		</div>
 

@@ -27,7 +27,7 @@ iframe{
 		outline:0;
 	}
 	.index-body{
-		background-image: url("material-pattern-blue.jpg");
+		background-image: url("/assets/images/material-pattern-blue.jpg");
 		background-size: 100%;
 	}
 	table{
